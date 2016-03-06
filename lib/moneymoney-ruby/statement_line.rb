@@ -57,8 +57,7 @@ module MoneyMoney
     
     # pass through all attributes which need no modification (currency etc.)
     def method_missing(arg)
-      super unless ATTRIBUTE_MAPPING.keys.include?(arg)
-      value(arg)
+      ATTRIBUTE_MAPPING.keys.include?(arg) ? value(arg) : super
     end
     
     def unique_id
