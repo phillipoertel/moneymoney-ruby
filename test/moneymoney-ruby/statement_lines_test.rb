@@ -3,7 +3,7 @@ require 'test_helper'
 class MoneyMoney::StatementLinesTest < MiniTest::Unit::TestCase
   
   def setup
-    fixture = File.join(File.dirname(__FILE__), '../fixtures/moneymoney-fixture.csv')
+    fixture = File.join(File.dirname(__FILE__), '../fixtures/statements.csv')
     @lines = MoneyMoney::StatementLines.read(fixture)
   end
   

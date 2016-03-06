@@ -34,11 +34,6 @@ module MoneyMoney
       Date.strptime(@row['Datum'], '%d.%m.%y')
     end
     
-    def charged?
-      # in different cases I get either "Abgerechnet" or "" when a line was charged.
-      @row['Verwendungszweck'] != "Nicht abgerechnet"
-    end
-    
     def valuta_on
       Date.strptime(@row['Wertstellung'], '%d.%m.%y')
     end

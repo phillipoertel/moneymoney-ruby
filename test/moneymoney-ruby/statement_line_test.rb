@@ -3,12 +3,7 @@ require 'test_helper'
 class MoneyMoney::StatementLineTest < MiniTest::Unit::TestCase
   
   def setup
-    fixture = File.join(File.dirname(__FILE__), '../fixtures/moneymoney-fixture.csv')
-    @lines = MoneyMoney::StatementLines.read(fixture)
-  end
-  
-  def setup_cc_fixture
-    fixture = File.join(File.dirname(__FILE__), '../fixtures/moneymoney-cc.csv')
+    fixture = File.join(File.dirname(__FILE__), '../fixtures/statements.csv')
     @lines = MoneyMoney::StatementLines.read(fixture)
   end
   
@@ -58,24 +53,6 @@ class MoneyMoney::StatementLineTest < MiniTest::Unit::TestCase
     row['Verwendungszweck'] = "#{row['Verwendungszweck']} Bla bla"
     refute_equal MoneyMoney::StatementLine.new(row), line.unique_id
   end
-  
-  def test_was_charged_when_empty
-    line = @lines[0]
-    assert_equal true, line.charged?
-  end
-  
-  # FIXME
-  # def test_was_charged_when_filled
-  #   setup_cc_fixture
-  #   line = @lines[1]
-  #   assert_equal true, line.charged?
-  # end
-  
-  # def test_was_not_charged
-  #   setup_cc_fixture
-  #   line = @lines[0]
-  #   assert_equal false, line.charged?
-  # end
   
   def test_prebooking_false
     line = @lines[0]
