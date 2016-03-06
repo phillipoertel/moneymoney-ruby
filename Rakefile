@@ -15,7 +15,11 @@ task :parse_file do
   require 'yaml'
   file = ENV['FILE']
   fields = ENV['FIELDS'].split(',')
+  padding = fields.max { |f| f.length }.length + 5
   MoneyMoney::StatementLines.read(file).each do |line|
-    puts fields.map { |f| "#{f}: #{line.send(f)}" }.join("\n")
+    fields.each do |f| 
+      puts "%-#{padding}s: %s" % [f, line.send(f)]
+    end.join("\n")
+    puts "-" * 80
   end
 end
