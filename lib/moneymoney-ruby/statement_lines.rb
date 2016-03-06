@@ -31,17 +31,17 @@ module MoneyMoney
     
       def read_csv(file)
         options = { 
-          :col_sep => ';', 
-          :headers => true,
-          :converters => [:all]
+          col_sep:    ';',
+          headers:    true,
+          converters: [:all]
         }
         CSV.new(File.read(file), options)
       end
       
       def get_csv_metadata
         rows = @csv.read
-        @earliest_booking = Date.parse(rows[rows.size - 1]['Buchungstag'])
-        @latest_booking   = Date.parse(rows[0]['Buchungstag'])
+        @earliest_booking = Date.strptime(rows[rows.size - 1]['Datum'], '%d.%m.%y')
+        @latest_booking   = Date.strptime(rows[0]['Datum'], '%d.%m.%y')
         @num_statements   = rows.size
         @csv.rewind
       end

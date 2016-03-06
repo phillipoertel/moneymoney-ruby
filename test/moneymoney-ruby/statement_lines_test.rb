@@ -37,11 +37,11 @@ class MoneyMoney::StatementLinesTest < MiniTest::Unit::TestCase
   end
   
   def test_latest_booking
-    assert_equal Date.parse("31.12.2012"), @lines.latest_booking
+    assert_equal Date.parse("24.02.2016"), @lines.latest_booking
   end
   
   def test_earliest_booking
-    assert_equal Date.parse("28.12.2012"), @lines.earliest_booking
+    assert_equal Date.parse("21.02.2016"), @lines.earliest_booking
   end
   
 end

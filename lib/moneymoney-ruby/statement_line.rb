@@ -11,15 +11,15 @@ module MoneyMoney
     include MoneyStringParser
     
     ATTRIBUTE_MAPPING = {
-      :currency => "Währung",
-      :amount => "Betrag",
-      :booked_on => "Buchungstag",
-      :valuta_on => "Valuta-Datum",
-      :recipient => "Empfänger/Auftraggeber",
-      :bank_code => "Bankleitzahl",
-      :account_number => "Kontonummer",
-      :description => "Verwendungszweck",
-      :category => "Kategorie"
+      currency:       "Währung",
+      amount:         "Betrag",
+      booked_on:      "Datum",
+      valuta_on:      "Wertstellung",
+      recipient:      "Name",
+      bank_code:      "Bank",
+      account_number: "Konto",
+      description:    "Verwendungszweck",
+      category:       "Kategorie"
     }
 
     def initialize(csv_row)
@@ -31,16 +31,16 @@ module MoneyMoney
     end
     
     def booked_on
-      Date.parse(@row['Buchungstag'])
+      Date.strptime(@row['Datum'], '%d.%m.%y')
     end
     
     def charged?
       # in different cases I get either "Abgerechnet" or "" when a line was charged.
-      @row['Buchungstext'] != "Nicht abgerechnet"
+      @row['Verwendungszweck'] != "Nicht abgerechnet"
     end
     
     def valuta_on
-      Date.parse(@row['Valuta-Datum'])
+      Date.strptime(@row['Wertstellung'], '%d.%m.%y')
     end
     
     def description
@@ -57,7 +57,7 @@ module MoneyMoney
     end
     
     def prebooking?
-      @row['Vormerkung'] == 'Ja'
+      !!(@row['Name'] =~ /^Ungebuchter Umsatz/)
     end
     
     def method_missing(arg)
