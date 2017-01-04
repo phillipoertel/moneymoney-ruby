@@ -17,7 +17,7 @@ class MoneyMoney::StatementLineTest < MiniTest::Unit::TestCase
     assert_equal nil, line.bank_code
     assert_equal nil, line.account_number
     assert_equal "35314369001 LUX", line.description
-    assert_equal 'Gebühren\Foo', line.category
+    assert_equal 'Gebühren - Foo', line.category
   end
 
   def test_empty_category_is_returned_as_nil
